@@ -1,0 +1,31 @@
+<div class="main-container" [class.main-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="main-toolbar">
+    <button mat-icon-button (click)="sidenav.toggle()"
+            matTooltip="Menu"
+            aria-label="Show / Close application menu panel">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-icon>pets</mat-icon>
+    <h1 class="main-app-name">GlassCat Admin Console</h1>
+    <div class="toolbar-spacer"></div>
+    <button mat-icon-button class="panel-header-button"
+            matTooltip="Log out"
+            aria-label="Log out">
+      <mat-icon>perm_identity</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="main-sidenav-container"
+                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <app-main-menu></app-main-menu>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="app-main-container">
+          <app-breadcrumb (onChange)="breadcrumbChangeHandler($event)"></app-breadcrumb>
+          <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

@@ -1,0 +1,16 @@
+<div class="app-breadcrumb">
+  <ul>
+    <li>
+      <a [routerLink]="" (click)="anchorClickHandler(null)">Home</a>
+      <span>
+        <i class="material-icons">navigate_next</i>
+      </span>
+    </li>
+    <li *ngFor="let routeItem of routeList; let i = index;">
+      <a [routerLink]="" (click)="anchorClickHandler(routeItem)">{{routeItem.label}}</a>
+      <span *ngIf="i < routeList.length - 1">
+        <i class="material-icons">navigate_next</i>
+      </span>
+    </li>
+  </ul>
+</div>

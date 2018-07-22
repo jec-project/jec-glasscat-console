@@ -1,0 +1,118 @@
+<!--
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+  Copyright 2016-2018 Pascal ECHEMANN.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http:  www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<h2>GlassCat Server Administration Console</h2>
+<mat-card class="app-welcome-card-version">
+  <mat-icon>info</mat-icon>
+  <strong>Welcome</strong> GlassCat Server Open Source Edition 1.0.0 (Korat).
+</mat-card>
+<mat-card class="app-welcome-card">
+  <mat-card-header>
+    <mat-card-title>
+        <h3 class="app-card-title">
+            <mat-icon class="app-card-title-icon">web</mat-icon>
+            Common Tasks
+        </h3>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+        <div fxFlex class="app-welcome-title mat-elevation-z1">
+            <h4>GlassCat News</h4>
+            <div class="button-row">
+                <button mat-button
+                        matTooltip="JEC Website"
+                        aria-label="JEC Website">
+                  <mat-icon svgIcon="jec"></mat-icon>
+                  JEC Website
+                </button>
+                <button mat-button
+                        matTooltip="Twitter"
+                        aria-label="Twitter">
+                  <mat-icon svgIcon="twitter"></mat-icon>
+                  Twitter
+                </button>
+                <button mat-button
+                        matTooltip="GlassCat on Github"
+                        aria-label="JGlassCat on Github">
+                  <mat-icon svgIcon="github"></mat-icon>
+                  GlassCat on Github
+                </button>
+              </div>
+        </div>
+        <div fxFlex class="app-welcome-title mat-elevation-z1">
+            <h4>Documentation</h4>
+            <div class="button-row">
+                <button mat-button disabled
+                        matTooltip="GlassCat documentation"
+                        aria-label="GlassCat documentation">
+                  <mat-icon>description</mat-icon>
+                  GlassCat Documentation Set
+                </button>
+              </div>
+        </div>
+      </div>
+      
+    </div>
+    <div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+          <div fxFlex class="app-welcome-title mat-elevation-z1">
+              <h4>Deployment</h4>
+              <div class="button-row">
+                <button mat-button
+                        matTooltip="List Deployed Domains"
+                        aria-label="List Deployed Domains">
+                  <mat-icon>menu</mat-icon>
+                  List Deployed Domains
+                </button>
+                <button mat-button disabled
+                        matTooltip="Deploy a Domain"
+                        aria-label="Deploy a Domain">
+                  <mat-icon>get_app</mat-icon>
+                    Deploy a Domain
+                </button>
+                <button mat-raised-button
+                        color="primary"
+                        matTooltip="New Project"
+                        aria-label="New Project">
+                  <mat-icon>create</mat-icon>
+                  New Project
+                </button>
+              </div>
+          </div>
+          <div fxFlex class="app-welcome-title mat-elevation-z1">
+              <h4>Administration</h4>
+              <div class="button-row">
+                  <button mat-button disabled
+                          matTooltip="Change Admin Password"
+                          aria-label="Change Admin Password">
+                    <mat-icon>lock</mat-icon>
+                    Change Admin Password
+                  </button>
+                  <button mat-button disabled
+                          matTooltip="List Password Aliases"
+                          aria-label="List Password Aliases">
+                    <mat-icon>people</mat-icon>
+                    List Password Aliases
+                  </button>
+                </div>
+          </div>
+        </div>
+      </div>
+  </mat-card-content>
+</mat-card>
