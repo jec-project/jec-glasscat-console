@@ -1,0 +1,15 @@
+// Placez vos paramètres dans ce fichier pour remplacer les paramètres par défaut et les paramètres utilisateur.
+{
+    "editor.rulers": [80],
+    "editor.tabSize": 2,
+    "files.exclude": {
+        "**/*.js": true
+    },
+    "TodoParser": {
+        "folderExclude": [
+            "node_modules",
+            "typings",
+            ".vscode"
+        ]
+    }
+}
