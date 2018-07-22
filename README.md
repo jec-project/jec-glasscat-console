@@ -1,6 +1,6 @@
 # JEC GlassCat Admin Console Project
 
-The GlassCat Admin Console Project contains the .
+The Admin Console Project contains the admin console for the GlassCat application server.
 
 [![][jec-logo]][jec-url]
 
