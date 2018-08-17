@@ -25,7 +25,9 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatButtonModule } from "@angular/material/button";
 import { MatChipsModule } from "@angular/material/chips";
-import { MatInputModule } from "@angular/material";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [],
@@ -38,11 +40,11 @@ import { MatInputModule } from "@angular/material";
     MatButtonModule,
     MatChipsModule,
     MatInputModule,
+    MatSelectModule,
+    MatSnackBarModule,
     RouterModule
   ],
-  providers: [
-
-  ],
+  providers: [],
   exports: [
     MatCardModule,
     MatIconModule,
@@ -51,6 +53,8 @@ import { MatInputModule } from "@angular/material";
     MatButtonModule,
     MatChipsModule,
     MatInputModule,
+    MatSelectModule,
+    MatSnackBarModule,
     RouterModule
   ]
 })

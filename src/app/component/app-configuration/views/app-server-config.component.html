@@ -52,20 +52,50 @@
     </mat-card-header>
     
     <mat-card-content>
-        <div fxLayout="row" fxLayoutAlign="start center">
-            <div class="app-chip-label">
-                Current GlassCat server locale is:
+        <div fxLayout="row">
+            <div *ngIf="!editLocale" fxLayout="row" fxLayoutAlign="start center">
+                <div class="app-chip-label">
+                    Current GlassCat server locale is:
+                </div>
+                <mat-chip-list>
+                    <mat-chip color="primary" selected>{{locale}}</mat-chip>
+                </mat-chip-list>
             </div>
-            <mat-chip-list>
-                <mat-chip color="primary" selected>{{locale}}</mat-chip>
-            </mat-chip-list>
+            <div *ngIf="editLocale" fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field>
+                    <mat-select placeholder="Select new locale">
+                        <mat-option *ngFor="let locale of localeList"
+                                    [value]="locale.value">
+                            {{locale.label}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
             <div class="toolbar-spacer"></div>
             <button mat-icon-button
+                    *ngIf="!editLocale"
                     class="panel-edit-button"
                     aria-label="Click to edit server locale"
-                    matTooltip="Click to edit server locale">
+                    matTooltip="Click to edit server locale"
+                    (click)="toggleLocaleEdit($event)">
                 <mat-icon>edit</mat-icon>
             </button>
+            <div class="button-row" fxLayout="row"
+                *ngIf="editLocale">
+                <button mat-button
+                        (click)="cancelLocaleEdit($event)"
+                        aria-label="Cancel"
+                        matTooltip="Cancel">
+                    <mat-icon matTooltip="Cancel">close</mat-icon>
+                    Cancel
+                </button>
+                <button mat-button color="primary"
+                        aria-label="Apply changes"
+                        matTooltip="Apply changes">
+                    <mat-icon matTooltip="Apply changes">save</mat-icon>
+                    Apply changes
+                </button>
+            </div>
         </div>
     </mat-card-content>
 </mat-card>
@@ -84,18 +114,18 @@
             <mat-form-field class="app-form-full-width">
                 <input matInput
                        [value]="errorPage"
-                       [disabled]="editErrorPageInactive">
+                       [disabled]="!editErrorPage">
             </mat-form-field>
             <div class="toolbar-spacer"></div>
             <button mat-icon-button
-                    *ngIf="editErrorPageInactive"
+                    *ngIf="!editErrorPage"
                     class="panel-edit-button"
-                    (click)="toggleErrorPageEditMode($event)"
+                    (click)="toggleErrorPageEdit($event)"
                     matTooltip="Click to edit server error page">
                 <mat-icon>edit</mat-icon>
             </button>
             <div class="button-row" fxLayout="row"
-                *ngIf="!editErrorPageInactive">
+                *ngIf="editErrorPage">
                 <button mat-button
                         (click)="cancelErrorPageEdit($event)"
                         aria-label="Cancel"
@@ -113,49 +143,3 @@
         </div>
     </mat-card-content>
 </mat-card>
-
-<!--
-
-<p-panel>
-  <p-header>
-    <div class="ui-helper-clearfix">
-      <span class="ui-panel-title"><i class="fa fa-globe"></i> Locale</span>
-      <button *ngIf="editLocaleInactive===false" type="button" class="ui-button-secondary" pButton icon="fa fa-remove" label="Cancel" style="float:right;" (click)="toggleLocaleEditionMode()"></button>
-      <button *ngIf="editLocaleInactive===true" type="button" pButton icon="fa fa-edit" label="Edit" style="float:right;" (click)="toggleLocaleEditionMode()"></button>
-    </div>
-  </p-header>
-  <div>
-    <p>Current GlassCat server locale is: <span class="label-info">{{locale}}</span></p>
-  </div>
-  <div *ngIf="editLocaleInactive===false" style="height:35px;">
-    <div style="float:left;">
-      <p-dropdown [options]="localeList" [(ngModel)]="selectedLocale" [style]="{'width':'150px'}"></p-dropdown>
-    </div>
-    <div style="float:left;width:5px;">&nbsp;</div>
-    <button type="button" pButton icon="fa fa-save" label="Apply changes" (click)="saveLocale()" style="float:left;"></button>
-  </div>
-</p-panel>
-
-<div>&nbsp;</div>
-
-<p-panel>
-  <p-header>
-    <div class="ui-helper-clearfix">
-      <span class="ui-panel-title"><i class="fa fa-eye-slash"></i> Error Page</span>
-      <button *ngIf="editErrorPageInactive===false" type="button" class="ui-button-secondary" pButton icon="fa fa-remove" label="Cancel" style="float:right;" (click)="toggleErrorPageEditionMode()"></button>
-      <button *ngIf="editErrorPageInactive===true" type="button" pButton icon="fa fa-edit" label="Edit" style="float:right;" (click)="toggleErrorPageEditionMode()"></button>
-    </div>
-  </p-header>
-  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-    <div class="ui-grid-row">
-      <label class="form-label ui-grid-col-2" for="errorPageInput">Error page *: </label>
-      <div class="ui-grid-col-6">
-        <input id="errorPageInput" pInputText type="text" [(ngModel)]="errorPage" [disabled]="editErrorPageInactive===true"/>
-      </div>
-      <div class="ui-grid-col-1"></div>
-      <div class="ui-grid-col-3" *ngIf="editErrorPageInactive===false">
-        <button class="form-label ui-grid-col-2" type="button" pButton icon="fa fa-save" label="Apply changes" (click)="saveErrorPage()"></button>
-      </div>
-    </div>
-  </div>
-</p-panel>-->

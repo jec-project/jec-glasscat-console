@@ -17,7 +17,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material";
-import { BreadcrumbService } from "../../service/breadcrumb.service";
+import { BreadcrumbService } from "../../service/ui/breadcrumb.service";
 
 /**
  * The component used to render the application home page.

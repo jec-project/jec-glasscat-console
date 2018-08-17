@@ -15,18 +15,15 @@
 //   limitations under the License.
 
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { BreadcrumbService } from "../../../service/breadcrumb.service";
+import { BreadcrumbService } from "../../../service/ui/breadcrumb.service";
 import { MenuItemBuilder } from "../../../util/menu-item.builder";
-import { ContextService } from "../../../service/context.service";
+import { ContextService } from "../../../service/glasscat/context.service";
+import { LocaleService } from "../../../service/glasscat/locale.service";
 import { Subscription } from "rxjs";
 import { BootstrapConfig, GlasscatConfig } from "jec-glasscat-config";
-/*
-import {ConsoleMenuItem} from "../../business/messaging/ConsoleMenuItem";
-import {LocaleService} from "../../services/LocaleService";
-import {DialogMessageService} from "../../services/messaging/DialogMessageService";
-import {MessagingService} from "../../services/messaging/MessagingService";
-import {ConsoleMessage} from "../../business/messaging/ConsoleMessage";
-import {BootstrapConfig} from "jec-glasscat-core";*/
+import { DialogService } from "../../../service/ui/dialog.service";
+import { DialogInfoBuilder } from "../../../util/dialog-info.builder";
+import { DialogInfoType } from "../../../util/dialog-info-type.enum";
 
 @Component({
   selector: "app-server-config",
@@ -34,29 +31,31 @@ import {BootstrapConfig} from "jec-glasscat-core";*/
 })
 export class ApServerConfigComponent implements OnInit, OnDestroy {
 
-  public version: string = null;
+  protected version: string = null;
 
-  public locale: string = null;
+  protected locale: string = null;
 
-  public editLocaleInactive: boolean = true;
+  protected editLocale: boolean = false;
 
-  public localeList:any[] = null;
+  protected errorPage: string = null;
 
-  public selectedLocale: string = null;
+  protected editErrorPage: boolean = false;
 
-  public errorPage: string = null;
+  protected localeList:any[] = null;
 
-  public editErrorPageInactive: boolean = true;
+  
+
+  
 
   private _context: any = null;
 
   private _contextSubscriber: Subscription = null;
+  private _localesSubscriber: Subscription = null;
 
   constructor(private _breadcrumbService: BreadcrumbService,
               private _contextService: ContextService,
-              /*private _localeService:LocaleService,
-              private _messagingService:MessagingService,
-  private _dialogMessageService:DialogMessageService*/){
+              private _localeService:LocaleService,
+              private _dialogService: DialogService){
   }
 
     /**
@@ -71,31 +70,10 @@ export class ApServerConfigComponent implements OnInit, OnDestroy {
      */
   public ngOnDestroy():void {
     this._contextSubscriber.unsubscribe();
-    //if(this._localesSubscriber) this._localesSubscriber.unsubscribe();
+    if(this._localesSubscriber) this._localesSubscriber.unsubscribe();
   }
 
-  /*
-
-  public toggleLocaleEditionMode():void {
-    this.editLocaleInactive = !this.editLocaleInactive;
-    if(!this.editLocaleInactive && !this.localeList) {
-      this._localesSubscriber= this._localeService.getLocaleList().subscribe(
-        data => {
-          this.localeList = data;
-          this.selectedLocale = this.locale;
-        },
-        err => {
-          this._dialogMessageService.push(ConsoleMessage.buildMessage(
-            "error", "Locale initialization error",
-            "An error occured while loading available locales list.<br/>You must restart the application."
-          ));
-          console.error(err);
-        }
-      );
-    }
-  }
-
-  public saveLocale():void {
+  /*public saveLocale():void {
     this._context.glasscat.locale = this.selectedLocale;
     if(this._contextUpdateSubscriber) this._contextUpdateSubscriber.unsubscribe();
     this._contextUpdateSubscriber = 
@@ -143,18 +121,39 @@ export class ApServerConfigComponent implements OnInit, OnDestroy {
 
   
   private _contextUpdateSubscriber:Subscription = null;
-  private _localesSubscriber:Subscription = null;
-  
-
-  
   */
 
-  protected toggleErrorPageEditMode(event: MouseEvent): void {
-    this.editErrorPageInactive = !this.editErrorPageInactive;
+  protected toggleLocaleEdit(event: MouseEvent): void {
+    
+    this.editLocale = !this.editLocale;
+    if(this.editLocale && !this.localeList) {
+      this._localesSubscriber= this._localeService.getLocaleList().subscribe(
+        data => {
+          this.localeList = data;
+        },
+        err => {
+          this._dialogService.showInfo(
+            DialogInfoBuilder.build(
+              "Locale initialization error", 
+              "An error occured while loading available locales list.<br/>You must restart the application.",
+              DialogInfoType.ERROR
+            )
+          );
+        }
+      );
+    }
+  }
+
+  protected cancelLocaleEdit(event: MouseEvent): void {
+    this.toggleLocaleEdit(event);
+  }
+
+  protected toggleErrorPageEdit(event: MouseEvent): void {
+    this.editErrorPage = !this.editErrorPage;
   }
 
   protected cancelErrorPageEdit(event: MouseEvent): void {
-    this.editErrorPageInactive = !this.editErrorPageInactive;
+    this.toggleErrorPageEdit(event);
   }
 
   /**
@@ -163,18 +162,20 @@ export class ApServerConfigComponent implements OnInit, OnDestroy {
   private getContext():void {
     this._contextSubscriber = this._contextService.getContext().subscribe(
       (data: BootstrapConfig) => {
-        this._context = data;
         const info: GlasscatConfig = data.glasscat;
+        this._context = data;
         this.version = info.version;
         this.locale = info.locale;
         this.errorPage = data.config.errorPage;
       },
       err => {
-        /*this._dialogMessageService.push(ConsoleMessage.buildMessage(
-          "error", "Context initialization error",
-          "An error occured while loading configuration files.<br/>You must restart the application."
-        ));*/
-        console.error(err);
+        this._dialogService.showInfo(
+          DialogInfoBuilder.build(
+            "Context initialization error", 
+            "An error occured while loading configuration files.<br/>You must restart the application.",
+            DialogInfoType.ERROR
+          )
+        );
       }
     );
   }

@@ -14,12 +14,24 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import { Injectable } from '@angular/core';
-import { RouteItem } from '../component/app-breadcrumb/route-item.interface';
-import { AbstractMessageService } from './core/abstract-message.service';
-
 /**
- * The service responsible for managing breadcrumb events.
+ * <code>DialogInfoType</code> provides enum values for indicating the type of a
+ * dialog message.
  */
-@Injectable()
-export class BreadcrumbService extends AbstractMessageService<RouteItem[]> {}
+export enum DialogInfoType {
+
+    /**
+     * Specifies that the message represents a standard information.
+     */
+    INFO = "info",
+    
+    /**
+     * Specifies that the message represents an error.
+     */
+    ERROR = "error",
+
+    /**
+     * Specifies that the message represents a valid action.
+     */
+    SUCCESS = "success"
+}

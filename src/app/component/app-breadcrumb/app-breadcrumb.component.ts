@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 import { RouteItem } from "./route-item.interface";
-import { BreadcrumbService } from "../../service/breadcrumb.service";
+import { BreadcrumbService } from "../../service/ui/breadcrumb.service";
 
 /**
  * The <code>AppBreadcrumbComponent</code> class represents a breadcrumb

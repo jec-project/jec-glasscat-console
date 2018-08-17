@@ -18,7 +18,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule, } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatExpansionModule } from "@angular/material/expansion";
@@ -29,15 +29,19 @@ import { AppMainMenuComponent } from "./component/app-main-menu/app-main-menu.co
 
 import { SharedModule } from "./shared/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
-import { BreadcrumbService } from "./service/breadcrumb.service";
+import { BreadcrumbService } from "./service/ui/breadcrumb.service";
 import { AppBreadcrumbComponent } from "./component/app-breadcrumb/app-breadcrumb.component";
-import { ContextService } from "./service/context.service";
+import { ContextService } from "./service/glasscat/context.service";
+import { LocaleService } from "./service/glasscat/locale.service";
+import { DialogService } from "./service/ui/dialog.service";
+import { DialogComponent } from "./component/dialog/dialog.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     AppMainMenuComponent,
-    AppBreadcrumbComponent
+    AppBreadcrumbComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,12 @@ import { ContextService } from "./service/context.service";
   ],
   providers: [
     BreadcrumbService,
-    ContextService
+    DialogService,
+    ContextService,
+    LocaleService
+  ],
+  entryComponents: [
+    DialogComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -18,7 +18,7 @@ import { Injectable } from "@angular/core";
 import { BootstrapConfig } from "jec-glasscat-config";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { environment } from '../../environments/environment';
+import { environment } from "../../../environments/environment";
 
 /**
  * The <code>ContextService</code> class provides methods for working with
@@ -35,7 +35,7 @@ export class ContextService {
     /**
      * The reference to the URL used to access the context API.
      */
-    private readonly CONTEXT_URL: string = environment.apiPath + "data/context";
+    private readonly DATA_URL: string = environment.apiPath + "data/context";
 
     /**
      * The HTTP header used to access the context API.
@@ -61,7 +61,7 @@ export class ContextService {
      *                                       context config.
      */
     public getContext(): Observable<BootstrapConfig> {
-        return this._http.get<BootstrapConfig>(this.CONTEXT_URL);
+        return this._http.get<BootstrapConfig>(this.DATA_URL);
     }
 
     /**
@@ -71,6 +71,6 @@ export class ContextService {
      *                                 be saved.
      */
     public saveContext(config: BootstrapConfig): void {
-        this._http.put(this.CONTEXT_URL, config, this.HTTP_OPTIONS);
+        this._http.put(this.DATA_URL, config, this.HTTP_OPTIONS);
     }
 }

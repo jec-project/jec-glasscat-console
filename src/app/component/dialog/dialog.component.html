@@ -1,0 +1,7 @@
+<div class="app-dialog-container" >
+  <h4 [ngClass]="resolveStyle()">
+    <mat-icon class="app-card-title-icon">{{ resolveIcon() }}</mat-icon>
+    {{ data.title }}
+  </h4>
+  <div [innerHTML]="data.message"></div>
+</div>
